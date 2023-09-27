@@ -12,7 +12,7 @@ while True and count<20:
     predict_number = int(input("Угадай число от 1 до 100"))
     count+=1
     if predict_number <1 or predict_number>100:
-        print(" Чсило вне диапазона")
+        print(" Число вне диапазона")
         break
     if predict_number==number:
         print(f"угадано число {number} за {count} попыток.")
