@@ -17,6 +17,7 @@ def guess_number(target_number):
             up_limit=guessed_number-1 # корректируем верхний предел для следующей итерации
 target_number=rd.randint(1,100) # генерируем случайное число от 1 до 100
 attempts_needed=guess_number(target_number)
+# угадываем число и выводим количество попыток
 print(f"{target_number} was found for {attempts_needed} attempts")
 def score_game(guess_function):
     # устанавливаем количество раундов для проверки
@@ -34,11 +35,4 @@ def score_game(guess_function):
     print(f"Average number of attempts to guess: {average_attempts}")
 
 # Вызываем функцию для оценки игры
-score_game(guess_number)
-
-
-
-
-
-# угадываем число и выводим количество попыток
-    
+score_game(guess_number)    
