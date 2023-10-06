@@ -1,6 +1,7 @@
 import pandas as pd
-melb_data_2 = pd.read_csv('Data\melb_data_2\melb_data_ps.csv', sep=',')
-print(melb_data_2)
+melb_data = pd.read_csv ("Data\melb_data_new\melb_data_ps.csv", sep=',')
+melb_df=pd.DataFrame(melb_data)
+print(melb_df.head())
 #index — номер строки
 #Suburb — наименование пригорода
 #Address — адрес
@@ -24,3 +25,21 @@ print(melb_data_2)
 #Regionname — наименование района Мельбурна
 #Propertycount — количество объектов недвижимости в районе, выставленных на продажу
 #Coordinates — широта и долгота, объединённые в кортеж
+melb_df = melb_data.copy()
+melb_df.head()
+melb_df = melb_df.drop(['index', 'Coordinates'], axis=1)
+melb_df.head()
+total_rooms = melb_df['Rooms'] + melb_df['Bedroom'] + melb_df['Bathroom']
+print(total_rooms)
+melb_df['MeanRoomsSquare'] = melb_df['BuildingArea'] / total_rooms
+print(melb_df['MeanRoomsSquare'])
+diff_area = melb_df['BuildingArea'] - melb_df['Landsize']
+sum_area = melb_df['BuildingArea'] + melb_df['Landsize']
+melb_df['AreaRatio'] = diff_area/sum_area
+print(melb_df['AreaRatio'])
+melb_df['Date']=pd.to_datetime(melb_df['Date'],dayfirst=True)
+melb_df['WeekdaySale']=melb_df['Date'].dt.day_name()
+weekend_count=melb_df[(melb_df['WeekdaySale']=='Saturday')|(melb_df['WeekdaySale']=='Sunday')].shape[0]
+print(weekend_count)
+
+
