@@ -41,5 +41,52 @@ melb_df['Date']=pd.to_datetime(melb_df['Date'],dayfirst=True)
 melb_df['WeekdaySale']=melb_df['Date'].dt.day_name()
 weekend_count=melb_df[(melb_df['WeekdaySale']=='Saturday')|(melb_df['WeekdaySale']=='Sunday')].shape[0]
 print(weekend_count)
+#Sales in Weekend
+def get_weekend(weekday):
+    if weekday in ['Saturday','Sunday']:
+        return 1
+    else:
+        return 0
+melb_df['Weekend']=melb_df['WeekdaySale'].apply(get_weekend)
+averga_price_weekend=melb_df['Weekend']=melb_df[melb_df['Weekend']==1]['Price'].mean()
+averga_price_weekend_rounded=round(averga_price_weekend)
+print(averga_price_weekend_rounded)
+#Change SellerG
+most_popular_names=melb_df['SellerG'].value_counts()
+popular_names=most_popular_names.head(49).index
+#print(popular_names)
+def replace_with_other(seller):
+    return seller if seller in popular_names else 'other'
+melb_df['SellerG'] = melb_df['SellerG'].apply(replace_with_other)
+#Во сколько раз минимальная цена Нельсон больше others
+nelson_data=melb_df[melb_df['SellerG']=='Nelson']
+other_data=melb_df[melb_df['SellerG']=='other']
+min_price_nelson=nelson_data['Price'].min()
+min_price_other=other_data['Price'].min()
+ratio=min_price_nelson/min_price_other
+print(round(ratio,1))
+#print(melb_df['SellerG'])
+# КАТЕГОРИИ
+melb_df.info()
+suburb_names=melb_df['Suburb']. value_counts()
+most_popular_names_suburb=suburb_names.head(119)
+print(most_popular_names_suburb)
+def replace_with_other_suburb(suburb):
+    return suburb if suburb in most_popular_names_suburb else 'other_suburb'
+melb_df_suburb_new = melb_df['Suburb'].apply(replace_with_other_suburb)
+print(melb_df_suburb_new)
+melb_df['Suburb']=melb_df['Suburb'].astype('category')
+print (melb_df['Suburb'].dtypes)
+melb_df.info()
 
+    
+
+
+
+
+
+
+
+
+    
 
