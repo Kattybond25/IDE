@@ -1,3 +1,4 @@
+import pandas as pd
 ratings_movie = pd.read_csv('Data\ratings_movie\ratings_movies.csv', sep=',')
 import re 
 def get_year_release(arg):
@@ -13,3 +14,5 @@ def get_year_release(arg):
     else:
         #если год не указан, возвращаем None
         return None
+find=ratings_movie['title'].findall('DDDD')
+print(find)
