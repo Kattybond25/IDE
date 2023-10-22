@@ -1,5 +1,5 @@
 import pandas as pd
-ratings_movie = pd.read_csv('Data\ratings_movie\ratings_movies.csv', sep=',')
+ratings_movie = pd.read_csv('Data/ratings_movie/ratings_movies.csv', sep=',')
 import re 
 def get_year_release(arg):
     #находим все слова по шаблону "(DDDD)"
